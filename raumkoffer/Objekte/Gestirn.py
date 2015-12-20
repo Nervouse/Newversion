@@ -1,6 +1,6 @@
 __author__ = 'Faiku Fitim, Janusz Gradonski'
 
-from raum.Texturen import *
+from Texturen.Texturen import *
 
 
 class Gestirn:

@@ -3,7 +3,7 @@ import time
 import tkinter
 
 
-class Splash:
+class Splash():
 
     def __init__(self, root, file, wait):
         """

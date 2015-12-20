@@ -1,8 +1,10 @@
 __author__ = 'Faiku Fitim, Janusz Gradonski'
 
-from raum.Gestirn import Gestirn
-from raum.Mond import Mond
 from math import *
+
+from Objekte.Gestirn import Gestirn
+from Objekte.Mond import Mond
+
 
 class Planet(Gestirn):
     def __init__(self, position, anim, rotation, rotSpeed, rotPoint, movSpeed, radius, textur, divisions, monde):

@@ -1,11 +1,9 @@
 __author__ = 'Faiku Fitim, Janusz Gradonski'
 
+from PyQt5 import QtWidgets
 
-from raum.Fixstern import *
-from raum.Planet import *
-from random import *
-from PyQt5 import QtCore, QtWidgets, QtGui
-
+from Objekte.Fixstern import *
+from Objekte.Planet import *
 
 
 class Galaxie(QtWidgets.QWidget):
@@ -41,6 +39,8 @@ class Galaxie(QtWidgets.QWidget):
         self.sonnenTextur = None
         self.uranusTextur = None
         self.venusTextur = None
+
+
 
     def loadTextures(self):
         """
@@ -207,14 +207,13 @@ class Galaxie(QtWidgets.QWidget):
                          '<br>Turn texture on/ off: <b>Right mouse click</b>'
                          '<br>'
                          '<br><b><i>Keyboard controls:</i></b>'
-                         '<br>Increase speed of Planets: <b>d</b>'
-                         '<br>Decrease speed of Planets: <b>a</b>'
-                         '<br>Stop animation: <b>s</b>'
+                         '<br>Increase speed of Planets: <b>f</b>'
+                         '<br>Decrease speed of Planets: <b>s</b>'
+                         '<br>Stop animation: <b>p</b>'
                          '<br>Load your own textures: <b>t</b>'
-                         '<br>Switch view: <b>m</b>'
-                         '<br>Zoom in: <b>x</b>'
-                         '<br>Zoom out: <b>y</b>'
-                         '<br>Switch to fullscreen mode: <b>f</b>'
+                         '<br>Switch view: <b>1 or 2</b>'
+                         '<br>Zoom in: <b>+</b>'
+                         '<br>Zoom out: <b>-</b>'
                          '<br>Display this help: <b>h</b>'
                          '<br>Quit program: <b>ESC</b>')
         layout = QtWidgets.QVBoxLayout(self)
@@ -229,6 +228,10 @@ class Galaxie(QtWidgets.QWidget):
         :param args: eingehender tastenbefehl
         :return:
         """
+        if args[0] == b'm':
+            self.__enter__()
+
+
         if args[0] == b'p':
             if self.anim:
                 self.pauseAll()
@@ -247,6 +250,8 @@ class Galaxie(QtWidgets.QWidget):
         if args[0] == b'h':
             self.help()
 
+
+
         if args[0] == b't':
             if self.mod:
                 self.disableTextures()
@@ -263,10 +268,10 @@ class Galaxie(QtWidgets.QWidget):
                 self.sonne.enableLight()
                 self.lights = True
 
-        if args[0] == b's':
+        if args[0] == b'f':
             self.sonne.animateAllChildrenFaster(0.05, 0.0001)
 
-        if args[0] == b'd':
+        if args[0] == b's':
             self.sonne.animateAllChildrenSlower(0.05, 0.0001)
 
         if args[0] == b'+':

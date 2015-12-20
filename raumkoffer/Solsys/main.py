@@ -1,10 +1,8 @@
 __author__ = 'Faiku Fitim, Janusz Gradonski'
 
-import sys
-from raum import *
-import tkinter
-from raum.Galaxie import *
-import time
+
+from Solsys.Galaxie import *
+
 def main(sc):
         glutInit(sys.argv)
         glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)   # Select type of Display mode
@@ -24,6 +22,5 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(glutInit(sys.argv))
     app.processEvents()
 
-    #time.sleep(1)
     s = Galaxie(900, 600)
     main(s)

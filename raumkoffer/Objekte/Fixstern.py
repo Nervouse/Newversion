@@ -1,7 +1,7 @@
 __author__ = 'Faiku Fitim, Janusz Gradonski'
 
-from raum.Gestirn import *
-from raum.Light import *
+from Objekte.Gestirn import *
+from Licht.Light import *
 
 
 class Fixstern(Gestirn):
@@ -108,7 +108,7 @@ class Fixstern(Gestirn):
 
     def animateAllChildrenSlower(self, factor, factorMov):
         """
-        Alle Planeten in der Galaxie werden Langsamer
+        Alle Planeten in der Solsys werden Langsamer
         :param factor: geschwindigkeitsfaktor
         :param factorMov: bewegungsgeschwindigkeitfaktor
         :return:

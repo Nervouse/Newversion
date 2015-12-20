@@ -6,7 +6,7 @@ from OpenGL.GL import *
 class Light:
     def __init__(self, position, color):
         """
-        Konstruktor für das licht
+        Konstruktor fuer das licht
         """
         self.enabled = True
         self.color = color
