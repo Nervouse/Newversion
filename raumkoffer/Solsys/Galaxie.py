@@ -145,6 +145,7 @@ class Galaxie(QtWidgets.QWidget):
     """
     Wenn die groesse vom Fenster geaendert wird
     """
+
     def ReSizeGLScene(self, Width, Height):
         """
         bei veranederung der fenstergroesse, die galaxie anpassen
@@ -163,6 +164,7 @@ class Galaxie(QtWidgets.QWidget):
 
         self.width = Width
         self.height = Height
+
 
     """
     szene zeichenn
@@ -228,8 +230,6 @@ class Galaxie(QtWidgets.QWidget):
         :param args: eingehender tastenbefehl
         :return:
         """
-        if args[0] == b'm':
-            self.__enter__()
 
 
         if args[0] == b'p':
