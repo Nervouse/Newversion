@@ -3,7 +3,7 @@ __version__ = "1.0"
 
 from PyQt5 import QtWidgets
 
-from Objekte.Fixstern import *
+from Objekte.HauptStern import *
 from Objekte.Planet import *
 
 
@@ -117,47 +117,13 @@ class Galaxie(QtWidgets.QWidget):
             self.sonne.animateAllChildrenSlower(0.05, 0.0001)
 
 
-    def loadPlanets(self):
-        """
-        Die Planeten werden initialisiert
-        """
-
-        # Planeten
-        # Parameter(Planet): (position, anim, rotation, rotSpeed, rotPoint, movSpeed, radius, textur, divisions, monde)
-        self.merkur = Planet([-17, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.0001, 0.4, self.merkurTextur, 32, None)
-        self.venus = Planet([-20.5, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.000125, 1.21, self.venusTextur, 32, None)
-        self.erde = Planet([-29, 0, -80], True, [90, 0, 0], 0.6, self.sonne.position, 0.00006, 1.28, self.erdenTextur, 32, None)
-        self.mars = Planet([-36.5, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.00009, 0.6, self.marsTextur, 32, None)
-        self.jupiter = Planet([-59, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.000035, 14.3, self.jupiterTextur, 32, None)
-        self.saturn = Planet([-85, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.000056, 12.05, self.saturnTextur, 32, None)
-        self.uranus = Planet([-98, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.00004, 5.11, self.uranusTextur, 32, None)
-        self.neptun = Planet([-115, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.000087, 4.95, self.neptunTextur, 32, None)
-        self.pluto = Planet([-125, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.000025, 0.1, self.plutoTextur, 32, None)
-
-        # Fixstern ist die Sonne
-        # Parameter(Fixstern): (position, rotSpeed, textur, planeten, anim, licht, radius, divisions)
-        self.sonne = Fixstern([0, 0, -80], 0.2, self.sonnenTextur, None, True, self.light, 10, 64)
-
-        # Monde
-         # Parameter(Mond): (anim, rotation, rotSpeed, parent, entf_rotPoint, movSpeed, radius, textur, divisions)
-        self.mond = Mond(True, [-90, 0, -80], 0, self.erde, 5, -0.00005, 0.4, self.mondTextur, 24)
-
-        self.erde.addMond(self.mond)
-        self.sonne.addPlanet(self.erde)
-        self.sonne.addPlanet(self.jupiter)
-        self.sonne.addPlanet(self.mars)
-        self.sonne.addPlanet(self.merkur)
-        self.sonne.addPlanet(self.neptun)
-        self.sonne.addPlanet(self.pluto)
-        self.sonne.addPlanet(self.saturn)
-        self.sonne.addPlanet(self.uranus)
-        self.sonne.addPlanet(self.venus)
-
     def texturLaden(self):
         """
         Die Texturen fuer die Planeten werden aus den Ordner
         img herausgeholt und geladen
         """
+        self.neptunTextur = Texturen.LoadTexture("../img/neptun.jpg")
+        self.uranusTextur = Texturen.LoadTexture("../img/uranus.jpg")
         self.plutoTextur = Texturen.LoadTexture("../img/pluto.jpg")
         self.saturnTextur = Texturen.LoadTexture("../img/saturn.jpg")
         self.sonnenTextur = Texturen.LoadTexture("../img/sonne.jpg")
@@ -166,14 +132,9 @@ class Galaxie(QtWidgets.QWidget):
         self.marsTextur = Texturen.LoadTexture("../img/mars.jpg")
         self.merkurTextur = Texturen.LoadTexture("../img/merkur.jpg")
         self.mondTextur = Texturen.LoadTexture("../img/mond.jpg")
-        self.neptunTextur = Texturen.LoadTexture("../img/neptun.jpg")
-        self.uranusTextur = Texturen.LoadTexture("../img/uranus.jpg")
         self.venusTextur = Texturen.LoadTexture("../img/venus.jpg")
-
-
-
-
-
+        self.phobosTextur = Texturen.LoadTexture("../img/phobos.jpg")
+        self.deimosTextur = Texturen.LoadTexture("../img/deimos.jpg")
 
 
 
@@ -198,9 +159,6 @@ class Galaxie(QtWidgets.QWidget):
         self.height = Height
 
 
-    """
-    szene zeichenn
-    """
     def DrawGLScene(self):
         """
         alle komponenten zeichnen
@@ -222,6 +180,50 @@ class Galaxie(QtWidgets.QWidget):
         """
         self.sonne.update()
 
+    def loadPlanets(self):
+        """
+        Die Planeten werden initialisiert
+        """
+        # Fixstern ist die Sonne
+        # Parameter(Fixstern): (position, rotSpeed, textur, planeten, anim, licht, radius, divisions)
+        self.sonne = Fixstern([0, 0, -80], 0.2, self.sonnenTextur, None, True, self.light, 10, 64)
+
+        # Planeten
+        # Parameter(Planet): (position, anim, rotation, rotSpeed, rotPoint, movSpeed, radius, textur, divisions, monde)
+        self.merkur = Planet([-17, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.0001, 0.4, self.merkurTextur, 32, None)
+        self.venus = Planet([-20.5, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.000125, 1.21, self.venusTextur, 32, None)
+        self.erde = Planet([-29, 0, -80], True, [90, 0, 0], 0.6, self.sonne.position, 0.00006, 1.28, self.erdenTextur, 32, None)
+        self.mars = Planet([-36.5, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.00009, 0.6, self.marsTextur, 32, None)
+        self.jupiter = Planet([-59, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.000035, 14.3, self.jupiterTextur, 32, None)
+        self.saturn = Planet([-85, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.000056, 12.05, self.saturnTextur, 32, None)
+        self.uranus = Planet([-98, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.00004, 5.11, self.uranusTextur, 32, None)
+        self.neptun = Planet([-115, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.000087, 4.95, self.neptunTextur, 32, None)
+        self.pluto = Planet([-125, 0, -80], True, [90, 0, 0], 0.05, self.sonne.position, 0.000025, 0.1, self.plutoTextur, 32, None)
+
+
+        # Monde
+         # Parameter(Mond): (anim, rotation, rotSpeed, parent, entf_rotPoint, movSpeed, radius, textur, divisions)
+        self.mond = Mond(True, [-90, 0, -80], 0, self.erde, 3, -0.00005, 0.5, self.mondTextur, 24)
+        self.phobos = Mond(True, [-90, 0, -80], 0, self.mars, 1.5, -0.0002, 0.3, self.phobosTextur, 24)
+        self.deimos = Mond(True, [-90, 0, -80], 0, self.mars, 3, -0.00008, 0.3, self.deimosTextur, 24)
+
+        #Planeten werden hinzugefugt zum Hauptstern Sonne (bzw. Monde zu den Planeten)
+        self.sonne.addPlanet(self.erde)
+        self.sonne.addPlanet(self.jupiter)
+        self.sonne.addPlanet(self.mars)
+        self.sonne.addPlanet(self.merkur)
+        self.sonne.addPlanet(self.neptun)
+        self.sonne.addPlanet(self.pluto)
+        self.sonne.addPlanet(self.saturn)
+        self.sonne.addPlanet(self.uranus)
+        self.sonne.addPlanet(self.venus)
+
+        #Monde hinzufugen
+        self.mars.addMond(self.phobos)
+        self.erde.addMond(self.mond)
+        self.mars.addMond(self.deimos)
+
+
     def help(self):
         """
         Method help
@@ -236,10 +238,6 @@ class Galaxie(QtWidgets.QWidget):
         self.edit = QtWidgets.QTextEdit()
         self.edit.setEnabled(False)
         self.edit.append('<h1>Controls</h1>'
-                         '<b><i>Mouse controls:</i></b>'
-                         '<br>Turn light on/ off: <b>Left mouse click</b>'
-                         '<br>Turn texture on/ off: <b>Right mouse click</b>'
-                         '<br>'
                          '<br><b><i>Keyboard controls:</i></b>'
                          '<br>Increase speed of Planets: <b>f</b>'
                          '<br>Decrease speed of Planets: <b>s</b>'
@@ -248,8 +246,7 @@ class Galaxie(QtWidgets.QWidget):
                          '<br>Switch view: <b>1 or 2</b>'
                          '<br>Zoom in: <b>+</b>'
                          '<br>Zoom out: <b>-</b>'
-                         '<br>Display this help: <b>h</b>'
-                         '<br>Quit program: <b>ESC</b>')
+                         '<br>Display this help: <b>h</b>')
         layout = QtWidgets.QVBoxLayout(self)
         layout.addWidget(self.edit)
         self.setWindowOpacity(0.9)

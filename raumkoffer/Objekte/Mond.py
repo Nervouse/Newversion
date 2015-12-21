@@ -1,11 +1,12 @@
 __author__ = 'Faiku Fitim, Janusz Gradonski'
+__version__ = "1.0"
 
 from math import *
 
-from Objekte.Gestirn import *
+from Objekte.GLAttribute import *
 
 
-class Mond(Gestirn):
+class Mond(GLAttribute):
     def __init__(self, anim, rotation, rotSpeed, parent, entf_rotPoint, movSpeed, radius, textur, divisions):
         """
         konstruktir um einen mond zu erstellen

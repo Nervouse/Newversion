@@ -1,4 +1,5 @@
 __author__ = 'Faiku Fitim, Janusz Gradonski'
+__version__ = "1.0"
 
 from OpenGL.GL import *
 from OpenGL.GLUT import *

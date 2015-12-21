@@ -1,12 +1,13 @@
 __author__ = 'Faiku Fitim, Janusz Gradonski'
+__version__ = "1.0"
 
 from Texturen.Texturen import *
 
 
-class Gestirn:
+class GLAttribute:
     def __init__(self, position, anim, rotation, rotSpeed, rotPoint, entf_rotPoint, movSpeed, radius, textur, divisions):
         """
-        kosnturktor des "interfaces" getsrin
+        Konstroktor
         :param position: posotion
         :param anim: animation
         :param rotation: roatation
@@ -19,31 +20,65 @@ class Gestirn:
         :param divisions: unterteulungen
         :return:
         """
-        self.position = position  # Position im XYZ-Raum
-        self.anim = anim  # Animationen an/aus
-        self.rotation = rotation  # Rotation um die eigene Achse
-        self.rotSpeed = rotSpeed  # Rotationsgeschwindigkeit
-        self.rotPoint = rotPoint  # Punkt, um den sich der Planet bewegen soll
+        self.rotSpeed = rotSpeed            # Rotationsgeschwindigkeit
+        self.position = position            # Position im XYZ-Raum
+        self.radius = radius                # Radius des Himmelskoerpers
+        self.textur = textur                # Textur
+        self.anim = anim                    # Animationen an/aus
+        self.rotation = rotation            # Rotation um die eigene Achse
+        self.rotPoint = rotPoint            # Punkt, um den sich der Planet bewegen soll
         self.entf_rotPoint = entf_rotPoint  # Entfernung von ebendiesem Punkt
-        self.movSpeed = movSpeed  # Orbitalgeschwindigkeit
-        self.radius = radius  # Radius des Himmelskoerpers
-        self.textur = textur  # Textur
-        self.divisions = divisions  # Unterteilungen. Mehr = feinere, schoenere Kugel
+        self.movSpeed = movSpeed            # Orbitalgeschwindigkeit
+        self.divisions = divisions          # Unterteilungen. Mehr = feinere, schoenere Kugel
         self.top = False
+
+    def rotate(self, rotation):
+        """
+        Dreht
+        :param rotation: array mit den werten
+        :return:
+        """
+        if isinstance(rotation, list) and len(rotation) == 3:
+            if rotation[0] >= 0:
+                self.rotation[0] += rotation[0]
+            if rotation[1] >= 0:
+                self.rotation[1] += rotation[1]
+            if rotation[2] >= 0:
+                self.rotation[2] += rotation[2]
+        else:
+            raise TypeError
 
 
     def update(self):
         """
-        Beim update einfach immer den Himmelskoerper um seine eigene achste rotieren
+        Beim update einfach immer den Himmelskoerper um seine eigene achse rotieren
         :return:
         """
         if self.anim:
             # Nur dann, wenn die animation nicht pausiert wurde
             self.rotate([0, 0, self.rotSpeed])
 
+
+    def translate(self, pos):
+        """
+        bewegt das GLAttribute weiter
+        :param pos: position um die es weiter bewegt wird
+        :return:
+        """
+        if isinstance(pos, list) and len(pos) == 3:
+            # Nur wenn das Array drei werte hat, weitermachen
+            if pos[0] >= 0:
+                self.position[0] += pos[0]
+            if pos[1] >= 0:
+                self.position[1] += pos[1]
+            if pos[2] >= 0:
+                self.position[2] += pos[2]
+        else:
+            raise TypeError("Array with len 3 needed")
+
     def draw(self, top, zoom):
         """
-        zeichent das gestrin
+
         :param top:
         :param zoom:
         :return:
@@ -80,40 +115,7 @@ class Gestirn:
         # Zeichnet eine Kugel auf den Bildschirm
         gluSphere(quadratic, self.radius, self.divisions, self.divisions)
 
-    def rotate(self, rotation):
-        """
-        dreht den himmelskoerper
-        :param rotation: array mit den werten
-        :return:
-        """
-        # Nur wenn das Array drei werte hat, weitermachen
-        if isinstance(rotation, list) and len(rotation) == 3:
-            if rotation[0] >= 0:
-                self.rotation[0] += rotation[0]
-            if rotation[1] >= 0:
-                self.rotation[1] += rotation[1]
-            if rotation[2] >= 0:
-                self.rotation[2] += rotation[2]
-        else:
-            raise TypeError
 
-
-    def translate(self, pos):
-        """
-        bewegt das gestirn weiter
-        :param pos: position um die es weiter bewegt wird
-        :return:
-        """
-        if isinstance(pos, list) and len(pos) == 3:
-            # Nur wenn das Array drei werte hat, weitermachen
-            if pos[0] >= 0:
-                self.position[0] += pos[0]
-            if pos[1] >= 0:
-                self.position[1] += pos[1]
-            if pos[2] >= 0:
-                self.position[2] += pos[2]
-        else:
-            raise TypeError("Array with len 3 needed")
 
     def setAnimation(self, anim):
         """

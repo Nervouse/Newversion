@@ -1,12 +1,13 @@
 __author__ = 'Faiku Fitim, Janusz Gradonski'
+__version__ = "1.0"
 
 from math import *
 
-from Objekte.Gestirn import Gestirn
+from Objekte.GLAttribute import GLAttribute
 from Objekte.Mond import Mond
 
 
-class Planet(Gestirn):
+class Planet(GLAttribute):
     def __init__(self, position, anim, rotation, rotSpeed, rotPoint, movSpeed, radius, textur, divisions, monde):
         """
         konstruktor der einen planeten anlegt
@@ -57,7 +58,7 @@ class Planet(Gestirn):
         :return:
         """
         if self.anim:
-            Gestirn.update(self)
+            GLAttribute.update(self)
 
             self.orbitalPos += self.movSpeed * 0.2
 
@@ -77,7 +78,7 @@ class Planet(Gestirn):
         :param zoom:
         :return:
         """
-        Gestirn.draw(self, top, zoom)
+        GLAttribute.draw(self, top, zoom)
 
         for x in range(0, len(self.monde)):
             self.monde[x].draw(top, zoom)
@@ -152,7 +153,7 @@ class Planet(Gestirn):
         :param anim: animation die hinzugefuegt wird
         :return:
         """
-        Gestirn.setAnimation(self, anim)
+        GLAttribute.setAnimation(self, anim)
 
         for i in range(0, len(self.monde)):
             self.monde[i].setAnimation(anim)

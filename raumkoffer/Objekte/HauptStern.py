@@ -1,10 +1,10 @@
 __author__ = 'Faiku Fitim, Janusz Gradonski'
 
-from Objekte.Gestirn import *
+from Objekte.GLAttribute import *
 from Licht.Light import *
 
 
-class Fixstern(Gestirn):
+class Fixstern(GLAttribute):
     def __init__(self, position, rotSpeed, textur, planeten, anim, licht, radius, divisions):
         """
         kosnturktor um einen fixstern anzulegen
@@ -51,14 +51,14 @@ class Fixstern(Gestirn):
 
     def getPlaneten(self):
         """
-        gitb alle planeten zurueck
+        Alle Planeten werden zuruckgegeben
         :return: alle planeten
         """
         return self.planeten
 
     def setAnimation(self, anim):
         """
-        setzt die animation
+        Es wird eine Animation gesetzt
         :param anim: animationswert
         :return:
         """
@@ -74,13 +74,13 @@ class Fixstern(Gestirn):
         :param zoom:
         :return:
         """
-        Gestirn.draw(self, top, zoom)
+        GLAttribute.draw(self, top, zoom)
 
         if isinstance(self.licht, Light):
             self.licht.draw()
 
         for x in range(0, len(self.planeten)):
-            if isinstance(self.planeten[x], Gestirn):
+            if isinstance(self.planeten[x], GLAttribute):
                 self.planeten[x].draw(top, zoom)
 
     def update(self):
@@ -89,7 +89,7 @@ class Fixstern(Gestirn):
         :return:
         """
         if self.anim:
-            Gestirn.update(self)
+            GLAttribute.update(self)
 
         for x in range(0, len(self.planeten)):
             self.planeten[x].update()

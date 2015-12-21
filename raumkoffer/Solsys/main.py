@@ -1,5 +1,5 @@
 __author__ = 'Faiku Fitim, Janusz Gradonski'
-
+__version__ = "1.0"
 
 from Solsys.Galaxie import *
 
@@ -10,7 +10,7 @@ def main(sc):
         glutInitWindowPosition(500, 300)                              # the window starts at the upper left corner of the screen
         glutCreateWindow(b'Fitim Gradonski Solarsystem')   # Titel
         glutDisplayFunc(sc.DrawGLScene)                           # Register the drawing function with glut
-        glutIdleFunc(sc.DrawGLScene)                              # scene nochmal zeichnen
+        glutIdleFunc(sc.DrawGLScene)
         glutReshapeFunc(sc.ReSizeGLScene)
         sc.init(640, 480)
         glutMainLoop()
