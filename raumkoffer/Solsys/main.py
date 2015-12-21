@@ -11,8 +11,7 @@ def main(sc):
         glutCreateWindow(b'Fitim Gradonski Solarsystem')   # Titel
         glutDisplayFunc(sc.DrawGLScene)                           # Register the drawing function with glut
         glutIdleFunc(sc.DrawGLScene)                              # scene nochmal zeichnen
-     #   glutReshapeFunc(sc.ReSizeGLScene)
-        # Das Fenster wird initialisiert
+        glutReshapeFunc(sc.ReSizeGLScene)
         sc.init(640, 480)
         glutMainLoop()
 

@@ -11,7 +11,7 @@ class Texturen():
     @staticmethod
     def LoadTexture(pic):
         """
-        ladet eine textur
+        Eine Textur wird geladen
         :param pic: pfad des Bilds der als textur geladen werden soll
         :return:
         """
